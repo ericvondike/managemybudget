@@ -1,0 +1,54 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.daklan.com/xml/shoppinglistcollection"
+           targetNamespace="http://www.daklan.com/xml/shoppinglistcollection" elementFormDefault="qualified">
+
+    <xs:element name="shoppinglistResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="shoppingList" type="tns:ShoppingListOut" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="ShoppingListOut">
+        <xs:sequence>
+            <xs:element name="listTitle" type="xs:string"/>
+            <xs:element name="listPrice" type="xs:double"/>
+            <xs:element name="dateShopped" type="xs:date"/>
+            <xs:element name="shoppingCenter" type="tns:ShoppingCenterOut"/>
+            <xs:element name="categoryOut" type="tns:CategoryOut" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="ShoppingCenterOut">
+        <xs:sequence>
+            <xs:element name="officialName" type="xs:string"/>
+            <xs:element name="givenName" type="xs:string" minOccurs="0"/>
+            <xs:element name="code" type="xs:string"/>
+            <xs:element name="address" type="xs:string" minOccurs="0"/>
+            <xs:element name="telNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="datesOpen" type="xs:date" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CategoryOut">
+        <xs:sequence>
+            <xs:element name="givenName" type="xs:string" minOccurs="0"/>
+            <xs:element name="officialName" type="xs:string"/>
+            <xs:element name="categoryPrice" type="xs:double"/>
+            <xs:element name="itemOut" type="tns:ItemOut" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ItemOut">
+        <xs:sequence>
+            <xs:element name="givenName" type="xs:string" minOccurs="0"/>
+            <xs:element name="code" type="xs:string"/>
+            <xs:element name="barcode" type="xs:string"/>
+            <xs:element name="description" type="xs:string"/>
+            <xs:element name="nuItem" type="xs:int"/>
+            <xs:element name="unitPrice" type="xs:double"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>
