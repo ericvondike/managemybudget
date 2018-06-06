@@ -10,6 +10,7 @@ import com.daklan.budget.control.rest.dto.output.ShoppingListOut;
 import com.daklan.budget.control.rest.service.BasketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -42,7 +43,7 @@ public class BasketServiceImpl implements BasketService {
      * @return shoppingListOut
      */
     @Override
-    public ShoppingListOut BuildBasket(ShoppingListIn shoppingListIn) {
+    public ShoppingListOut BuildBasket(ShoppingListIn shoppingListIn, Model model) {
 
         shoppingListOut.setListPrice(shoppingListIn.getListPrice());
         shoppingListOut.setListTitle(shoppingListIn.getListTitle());
