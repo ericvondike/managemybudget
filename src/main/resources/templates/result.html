@@ -14,7 +14,7 @@
 <h1>
     Your Basket:
 </h1>
-<table th:object="${result}">
+<table>
     <tr>
         <th>
             Shopping List Title:
@@ -25,9 +25,5 @@
         <td th:text="${result.listTitle}"></td>
     </tr>
 </table>
-<form class="form-horizontal" th:object="${result}" th:action="@{/result}" method="get">
-</form>
-</form>
-
 </body>
 </html>

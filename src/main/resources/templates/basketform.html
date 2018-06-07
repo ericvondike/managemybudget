@@ -15,12 +15,12 @@
 <div class="container">
     <h2>Your Basket</h2>
 
-    <form class="form-horizontal" th:object="${}" th:action="@{/result}" method="get">
+    <form class="form-horizontal" th:object="${basketForm}" th:action="@{/result}" method="post">
         <div class="form-group" th:class="form-group">
             <label class="col-sm-2 control-label">List Title:</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" name="listTitle" id="listTitle" th:field="*{listTitle}"/>
-                <!--<div class="row">
+                <div class="row">
                     <h4>Shopping Center</h4>
                     <div class="col-sm-10">
                         <label class="col-sm-2 control-label">Code:</label>
@@ -44,12 +44,12 @@
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="telNumber" id="telNumber" th:field="*{shoppingCenter.telNumber}"/>
                         </div>
-                        <label class="col-sm-2 control-label">Open Dates:</label>
+                        <!--<label class="col-sm-2 control-label">Open Dates:</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="opendays" id="opendays" th:field="*{shoppingCenter.datesOpen}"/>
-                        </div>
+                        </div>-->
                     </div>
-                </div>-->
+                </div>
             </div>
         </div>
 

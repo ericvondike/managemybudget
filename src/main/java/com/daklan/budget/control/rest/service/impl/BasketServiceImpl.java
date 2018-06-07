@@ -63,11 +63,12 @@ public class BasketServiceImpl implements BasketService {
      */
     private List<LocalDate> getDatesOpen(ShoppingListIn shoppingListIn) {
         List<LocalDate> dates = new ArrayList<>();
+        if(shoppingListIn.getShoppingCenter().getDatesOpen() !=null) {
 
-        for (LocalDate date : shoppingListIn.getShoppingCenter().getDatesOpen()) {
-            dates.add(date);
+            for (LocalDate date : shoppingListIn.getShoppingCenter().getDatesOpen()) {
+                dates.add(date);
+            }
         }
-
         return dates;
     }
 
@@ -96,17 +97,19 @@ public class BasketServiceImpl implements BasketService {
      */
     private List<ItemCategoryOut> getItemCategoryList(ShoppingListIn shoppingListIn) {
         List<ItemCategoryOut> itemCategoryOuts = new ArrayList<>();
+        if(shoppingListIn.getItemCategoryList() != null) {
+            for(ItemCategoryIn itemCategoryIn : shoppingListIn.getItemCategoryList()) {
+                ItemCategoryOut itemCategoryOut = new ItemCategoryOut();
 
-        for(ItemCategoryIn itemCategoryIn : shoppingListIn.getItemCategoryList()) {
-            ItemCategoryOut itemCategoryOut = new ItemCategoryOut();
+                itemCategoryOut.setItemCategoryGivenName(itemCategoryIn.getItemCategoryGivenName());
+                itemCategoryOut.setItemCategory(itemCategoryIn.getItemCategory());
+                itemCategoryOut.setNumItem(itemCategoryIn.getNumItem());
+                itemCategoryOut.setItemCategoryPrice(itemCategoryIn.getItemCategoryPrice());
+                itemCategoryOut.setItemsList(getItemsList(itemCategoryIn));
 
-            itemCategoryOut.setItemCategoryGivenName(itemCategoryIn.getItemCategoryGivenName());
-            itemCategoryOut.setItemCategory(itemCategoryIn.getItemCategory());
-            itemCategoryOut.setNumItem(itemCategoryIn.getNumItem());
-            itemCategoryOut.setItemCategoryPrice(itemCategoryIn.getItemCategoryPrice());
-            itemCategoryOut.setItemsList(getItemsList(itemCategoryIn));
+                itemCategoryOuts.add(itemCategoryOut);
+            }
 
-            itemCategoryOuts.add(itemCategoryOut);
         }
 
         return itemCategoryOuts;
