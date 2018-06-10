@@ -30,7 +30,7 @@ public class ShoppingCenterIn implements Serializable {
     @Nullable
     private String address;
     @Nullable
-    private List<LocalDate> datesOpen;
+    private List<String> datesOpen;
     @Nullable
     private String telNumber;
 
@@ -99,14 +99,14 @@ public class ShoppingCenterIn implements Serializable {
      *
      * @return
      */
-    public List<LocalDate> getDatesOpen() {
+    public List<String> getDatesOpen() {
         return datesOpen;
     }
     /**
      *
      * @param datesOpen
      */
-    public void setDatesOpen(List<LocalDate> datesOpen) {
+    public void setDatesOpen(List<String> datesOpen) {
         this.datesOpen = datesOpen;
     }
 
@@ -126,5 +126,7 @@ public class ShoppingCenterIn implements Serializable {
     public void setTelNumber(String telNumber) {
         this.telNumber = telNumber;
     }
+
+
 }
 

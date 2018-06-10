@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -50,7 +51,6 @@ public class BasketServiceImpl implements BasketService {
         shoppingListOut.setShoppingCenter(getShoppingCenter(shoppingListIn));
         shoppingListOut.setItemCategoryList(getItemCategoryList(shoppingListIn));
 
-
         return shoppingListOut;
     }
 
@@ -63,9 +63,10 @@ public class BasketServiceImpl implements BasketService {
      */
     private List<LocalDate> getDatesOpen(ShoppingListIn shoppingListIn) {
         List<LocalDate> dates = new ArrayList<>();
-        if(shoppingListIn.getShoppingCenter().getDatesOpen() !=null) {
+        if(shoppingListIn.getShoppingCenter().getDatesOpen() != null) {
 
-            for (LocalDate date : shoppingListIn.getShoppingCenter().getDatesOpen()) {
+            for (String strDate : shoppingListIn.getShoppingCenter().getDatesOpen()) {
+                LocalDate date = LocalDate.parse(strDate);
                 dates.add(date);
             }
         }

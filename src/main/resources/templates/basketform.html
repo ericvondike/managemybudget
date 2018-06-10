@@ -44,9 +44,21 @@
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="telNumber" id="telNumber" th:field="*{shoppingCenter.telNumber}"/>
                         </div>
-                        <!--<label class="col-sm-2 control-label">Open Dates:</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="opendays" id="opendays" th:field="*{shoppingCenter.datesOpen}"/>
+                        <label class="col-sm-2 control-label">Open Dates:</label>
+                        <td><input type="text" class="form-control" name="opendays" id="opendays" th:field="*{shoppingCenter.datesOpen}"/></td>
+                        <table>
+                            <tr>
+                                <th>Date</th>
+                                <th>
+                                    <button type="submit" name="addDate">Add Date</button>
+                                </th>
+                            </tr>
+                            <tr th:each="date, rowStat : *{shoppingCenter.datesOpen}">
+                                <td><input type="text" th:field="*{shoppingCenter.datesOpen[__${rowStat.index}__]}" placeholder="dates ..."></td>
+                            </tr>
+                        </table>
+                        <!--<div class="col-sm-10">
+
                         </div>-->
                     </div>
                 </div>
