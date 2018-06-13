@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class FormBasketControler {
@@ -22,7 +23,7 @@ public class FormBasketControler {
         this.service = service;
     }
 
-    @RequestMapping("/basketform")
+    @RequestMapping(value = "/basketform")
     public String showBasketForm(Model model) {
 
         ShoppingListIn shoppingListIn = new ShoppingListIn();
@@ -31,7 +32,7 @@ public class FormBasketControler {
         return "basketform";
     }
 
-    @RequestMapping(value = "/basketform", params = {"addDate"})
+    @RequestMapping(value = "/basketform", method = RequestMethod.POST, params = "addDate")
     public String addDate(ShoppingListIn shoppingListIn, BindingResult result) {
         ShoppingCenterIn shoppingCenterIn = shoppingListIn.getShoppingCenter();
         shoppingCenterIn.getDatesOpen().add(new String());
