@@ -55,6 +55,39 @@
                             </div>
                         </div>
                     </div>
+                    <fieldset>
+                        <legend th:text="#{date.open}">Dates Open</legend>
+
+                        <ul th:if="${#fields.hasErrors('*')}" class="errorlist">
+                            <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+                        </ul>
+
+                        <div>
+                            <label for="shoppingCenter.datesOpen">
+                                <span th:text="#{date.open}">Dates Open</span>
+                                (<span th:text="#{date.format}"></span>)
+                            </label>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th th:text="#{date}">Date</th>
+                                    <th>
+                                        <button type="submit" name="addRow" th:text="#{add.row}">Add Row</button>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="string, rowStat :*{shoppingCenter.datesOpen}">
+                                    <td th:text="${rowStat.count}">1</td>
+                                    <td>
+                                        <input th:type="text" th:field="*{shoppingCenter.datesOpen[__${rowStat.index}__].string}" th:errorclass="fieldError">
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </fieldset>
+
                 </div>
             </div>
         </div>

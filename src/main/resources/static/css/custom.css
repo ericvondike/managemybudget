@@ -113,3 +113,5 @@ img {
     font-weight: 200;
     line-height: 30px;
 }
+table { border-collapse: collapse; }
+tr:nth-child(3) { border: solid thin; }
