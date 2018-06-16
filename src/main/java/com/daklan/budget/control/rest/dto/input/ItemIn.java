@@ -7,7 +7,6 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
-//@Repository
 public class ItemIn implements Serializable {
 
     private static final Long serialVersionUID = 42L;

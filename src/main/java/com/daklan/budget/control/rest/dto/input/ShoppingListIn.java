@@ -1,9 +1,14 @@
 package com.daklan.budget.control.rest.dto.input;
 
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.stereotype.Repository;
+
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,13 +26,8 @@ public class ShoppingListIn implements Serializable {
      * The list of the item classes in here
      */
     @NotNull
-    private List<ItemCategoryIn> itemCategoryList;
+    private List<CategoryIn> categoryInList = new ArrayList<CategoryIn>();
 
-    /**
-     * The total price of the list
-     */
-    @NotNull
-    private double listPrice;
 
     /**
      * The shopping center from which the list has been bought.
@@ -35,6 +35,8 @@ public class ShoppingListIn implements Serializable {
     @NotNull
     private ShoppingCenterIn shoppingCenter;
 
+    public ShoppingListIn() { super();
+    }
 
     public String getListTitle() {
         return listTitle;
@@ -44,20 +46,12 @@ public class ShoppingListIn implements Serializable {
         this.listTitle = listTitle;
     }
 
-    public List<ItemCategoryIn> getItemCategoryList() {
-        return itemCategoryList;
+    public List<CategoryIn> getCategoryInList() {
+        return this.categoryInList;
     }
 
-    public void setItemCategoryList(List<ItemCategoryIn> itemCategoryListIn) {
-        this.itemCategoryList = itemCategoryListIn;
-    }
-
-    public double getListPrice() {
-        return listPrice;
-    }
-
-    public void setListPrice(double listPrice) {
-        this.listPrice = listPrice;
+    public void setCategoryInList(List<CategoryIn> itemCategoryListIn) {
+        this.categoryInList = itemCategoryListIn;
     }
 
     public ShoppingCenterIn getShoppingCenter() {
@@ -66,5 +60,38 @@ public class ShoppingListIn implements Serializable {
 
     public void setShoppingCenter(ShoppingCenterIn shoppingCenter) {
         this.shoppingCenter = shoppingCenter;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (!(o instanceof ShoppingListIn)) return false;
+
+        ShoppingListIn that = (ShoppingListIn) o;
+
+        return new EqualsBuilder()
+                .append(listTitle, that.listTitle)
+                .append(categoryInList, that.categoryInList)
+                .append(shoppingCenter, that.shoppingCenter)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(listTitle)
+                .append(categoryInList)
+                .append(shoppingCenter)
+                .toHashCode();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("listTitle", listTitle)
+                .append("categoryInList", categoryInList)
+                .append("shoppingCenter", shoppingCenter)
+                .toString();
     }
 }

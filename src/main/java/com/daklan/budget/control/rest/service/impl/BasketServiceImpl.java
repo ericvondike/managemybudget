@@ -1,19 +1,19 @@
 package com.daklan.budget.control.rest.service.impl;
 
-import com.daklan.budget.control.rest.dto.input.ItemCategoryIn;
+import com.daklan.budget.control.rest.dto.input.CategoryIn;
 import com.daklan.budget.control.rest.dto.input.ItemIn;
 import com.daklan.budget.control.rest.dto.input.ShoppingListIn;
 import com.daklan.budget.control.rest.dto.output.ItemCategoryOut;
 import com.daklan.budget.control.rest.dto.output.ItemOut;
 import com.daklan.budget.control.rest.dto.output.ShoppingCenterOut;
 import com.daklan.budget.control.rest.dto.output.ShoppingListOut;
+import com.daklan.budget.control.rest.repositories.BasketRepository;
 import com.daklan.budget.control.rest.service.BasketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -25,7 +25,6 @@ public class BasketServiceImpl implements BasketService {
 
     private ShoppingListIn shoppingListIn;
     private ShoppingListOut shoppingListOut;
-
     /**
      *
      * @param shoppingListIn
@@ -46,7 +45,6 @@ public class BasketServiceImpl implements BasketService {
     @Override
     public ShoppingListOut BuildBasket(ShoppingListIn shoppingListIn, Model model) {
 
-        shoppingListOut.setListPrice(shoppingListIn.getListPrice());
         shoppingListOut.setListTitle(shoppingListIn.getListTitle());
         shoppingListOut.setShoppingCenter(getShoppingCenter(shoppingListIn));
         shoppingListOut.setItemCategoryList(getItemCategoryList(shoppingListIn));
@@ -98,15 +96,14 @@ public class BasketServiceImpl implements BasketService {
      */
     private List<ItemCategoryOut> getItemCategoryList(ShoppingListIn shoppingListIn) {
         List<ItemCategoryOut> itemCategoryOuts = new ArrayList<>();
-        if(shoppingListIn.getItemCategoryList() != null) {
-            for(ItemCategoryIn itemCategoryIn : shoppingListIn.getItemCategoryList()) {
+        if(shoppingListIn.getCategoryInList() != null) {
+            for(CategoryIn categoryIn : shoppingListIn.getCategoryInList()) {
                 ItemCategoryOut itemCategoryOut = new ItemCategoryOut();
 
-                itemCategoryOut.setItemCategoryGivenName(itemCategoryIn.getItemCategoryGivenName());
-                itemCategoryOut.setItemCategory(itemCategoryIn.getItemCategory());
-                itemCategoryOut.setNumItem(itemCategoryIn.getNumItem());
-                itemCategoryOut.setItemCategoryPrice(itemCategoryIn.getItemCategoryPrice());
-                itemCategoryOut.setItemsList(getItemsList(itemCategoryIn));
+                itemCategoryOut.setItemCategoryGivenName(categoryIn.getGivenName());
+                itemCategoryOut.setItemCategory(categoryIn.getOfficialName());
+                itemCategoryOut.setItemCategoryPrice(categoryIn.getItemCategoryPrice());
+                itemCategoryOut.setItemsList(getItemsList(categoryIn));
 
                 itemCategoryOuts.add(itemCategoryOut);
             }
@@ -118,13 +115,13 @@ public class BasketServiceImpl implements BasketService {
 
     /**
      *
-     * @param itemCategoryIn
+     * @param categoryIn
      * @return
      */
-    private List<ItemOut> getItemsList(ItemCategoryIn itemCategoryIn) {
+    private List<ItemOut> getItemsList(CategoryIn categoryIn) {
         List<ItemOut> itemOuts = new ArrayList<>();
 
-        for (ItemIn itemIn : itemCategoryIn.getItemsList()) {
+        for (ItemIn itemIn : categoryIn.getItemsList()) {
             ItemOut itemOut = new ItemOut();
 
             itemOut.setItemBarcode(itemIn.getItemBarcode());
