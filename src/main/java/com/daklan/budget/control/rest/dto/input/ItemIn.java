@@ -36,7 +36,18 @@ public class ItemIn implements Serializable {
     private String itemDescription;
 
     @NotNull
+    private Integer numItem;
+
+    @NotNull
     private double itemPrice;
+
+    public Integer getNumItem() {
+        return numItem;
+    }
+
+    public void setNumItem(Integer numItem) {
+        this.numItem = numItem;
+    }
 
     public String getItemGivenName() {
         return itemGivenName;
@@ -86,13 +97,14 @@ public class ItemIn implements Serializable {
         return Double.compare(item.itemPrice, itemPrice) == 0 &&
                 Objects.equals(itemCode, item.itemCode) &&
                 Objects.equals(itemBarcode, item.itemBarcode) &&
+                Objects.equals(numItem, item.numItem) &&
                 Objects.equals(itemDescription, item.itemDescription);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(itemCode, itemBarcode, itemDescription, itemPrice);
+        return Objects.hash(itemCode, itemBarcode, itemDescription, itemPrice, numItem);
     }
 
     @Override
@@ -102,7 +114,8 @@ public class ItemIn implements Serializable {
                 ", itemCode='" + itemCode + '\'' +
                 ", itemBarcode='" + itemBarcode + '\'' +
                 ", itemDescription='" + itemDescription + '\'' +
-                ", itemPrice=" + itemPrice +
+                ", itemPrice=" + itemPrice + '\'' +
+                ", numItem" + numItem +
                 '}';
     }
 }

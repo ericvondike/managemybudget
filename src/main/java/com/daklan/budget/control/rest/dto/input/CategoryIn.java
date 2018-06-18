@@ -16,6 +16,8 @@ public class CategoryIn implements Serializable {
 
     private static final Long serialVersionUID = 42L;
 
+    @NotNull
+    private Category category;
     /**
      * The free text zone entered by the customer.
      */
@@ -40,6 +42,14 @@ public class CategoryIn implements Serializable {
      */
     @NotNull
     private double itemCategoryPrice;
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     public String getGivenName() {
         return givenName;
@@ -87,6 +97,7 @@ public class CategoryIn implements Serializable {
                 .append(givenName, that.givenName)
                 .append(officialName, that.officialName)
                 .append(itemsList, that.itemsList)
+                .append(category, that.category)
                 .isEquals();
     }
 
@@ -97,6 +108,7 @@ public class CategoryIn implements Serializable {
                 .append(officialName)
                 .append(itemsList)
                 .append(itemCategoryPrice)
+                .append(category)
                 .toHashCode();
     }
 
@@ -107,6 +119,7 @@ public class CategoryIn implements Serializable {
                 .append("officialName", officialName)
                 .append("itemsList", itemsList)
                 .append("itemCategoryPrice", itemCategoryPrice)
+                .append("category", category)
                 .toString();
     }
 }

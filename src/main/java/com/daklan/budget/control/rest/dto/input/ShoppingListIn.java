@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,8 @@ public class ShoppingListIn implements Serializable {
      */
     @NotNull
     private String listTitle;
+    @NotNull
+    private LocalDate dateShopped;
 
     /**
      * The list of the item classes in here
@@ -33,9 +36,20 @@ public class ShoppingListIn implements Serializable {
      * The shopping center from which the list has been bought.
      */
     @NotNull
-    private ShoppingCenterIn shoppingCenter;
+    private ShoppingCenterIn shoppingCenterIn;
+
+    @NotNull
+    private ShoppingCenter shoppingCenter = ShoppingCenter.AUCHAN;
 
     public ShoppingListIn() { super();
+    }
+
+    public LocalDate getDateShopped() {
+        return dateShopped;
+    }
+
+    public void setDateShopped(LocalDate dateShopped) {
+        this.dateShopped = dateShopped;
     }
 
     public String getListTitle() {
@@ -55,10 +69,14 @@ public class ShoppingListIn implements Serializable {
     }
 
     public ShoppingCenterIn getShoppingCenter() {
-        return shoppingCenter;
+        return shoppingCenterIn;
     }
 
     public void setShoppingCenter(ShoppingCenterIn shoppingCenter) {
+        this.shoppingCenterIn = shoppingCenter;
+    }
+
+    public void setShoppingCenter(ShoppingCenter shoppingCenter) {
         this.shoppingCenter = shoppingCenter;
     }
 
@@ -73,7 +91,8 @@ public class ShoppingListIn implements Serializable {
         return new EqualsBuilder()
                 .append(listTitle, that.listTitle)
                 .append(categoryInList, that.categoryInList)
-                .append(shoppingCenter, that.shoppingCenter)
+                .append(shoppingCenterIn, that.shoppingCenterIn)
+                .append(dateShopped, that.dateShopped)
                 .isEquals();
     }
 
@@ -82,7 +101,8 @@ public class ShoppingListIn implements Serializable {
         return new HashCodeBuilder(17, 37)
                 .append(listTitle)
                 .append(categoryInList)
-                .append(shoppingCenter)
+                .append(shoppingCenterIn)
+                .append(dateShopped)
                 .toHashCode();
     }
 
@@ -91,7 +111,8 @@ public class ShoppingListIn implements Serializable {
         return new ToStringBuilder(this)
                 .append("listTitle", listTitle)
                 .append("categoryInList", categoryInList)
-                .append("shoppingCenter", shoppingCenter)
+                .append("shoppingCenterIn", shoppingCenterIn)
+                .append("dateShopped", dateShopped)
                 .toString();
     }
 }
